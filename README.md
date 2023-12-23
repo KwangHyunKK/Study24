@@ -1,6 +1,6 @@
 # Embedded_Test
 
-### Docker Ubuntu 20:04 설치
+### Docker Ubuntu 22:04 설치
 
 ```
 $ docker pull ubuntu:20.04
