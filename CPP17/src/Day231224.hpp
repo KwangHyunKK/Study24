@@ -7,6 +7,8 @@
 #include <cassert>
 #include <initializer_list>
 
+/// @brief Array  - iterator
+/// @tparam Type 
 template<typename Type>
 class Array{
     public:
@@ -144,4 +146,116 @@ int run1()
     std::cout << "안녕\n";
     return 0;
 }
+
+
+////////////////////// 타입 변환 연산자
+
+// for enum
+
+enum Days {Sunday = 0, Monday = Sunday + 1, Tuesday, wednesday, Thursday, Friday, Saturday = Sunday + 6};
+enum class Months : short {Jan = 1, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec };
+const char* week[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+
+const char* DayName(Days day)
+{
+    if(day < Sunday || day > Saturday)return "뭐라는거야 ";
+    return week[day];
+}
+
+/// 1. static_cast
+int run2()
+{
+    /// 일반 변환 ///
+    int n = 100;
+    void* nv = &n; // 암시적 변환 작업
+    
+    // long 타입의 포인터가 정수 타입의 변수를 가리키도록
+    long* n01 = static_cast<long*>(nv);
+    int* n02 = static_cast<int*>(&n);
+
+    std::cout << "n = " << n << ", *n01 = " << *n01 << ", *n02 = " << *n02 << "\n";
+
+    std::vector<long> e = {1, 23, 10};
+    void* voidp = &e;
+
+    std::vector<int> * vec = static_cast<std::vector<int>*>(voidp);\
+
+    std::vector<int> vr = *vec;
+    for(int a: vr)
+        std::cout << a << " ";
+    std::cout << "\n";
+
+
+    ///  열거형 변환 ///
+ 
+    Months thisMonth = Months::Dec;
+
+    Days today = static_cast<Days>(thisMonth);
+    std::cout << DayName(today) << "는 " << today + 1 << "번째 요일이다.\n";
+
+    Months nextMonth = (Months)((short)Months::Dec - 12 + 1);
+    today = static_cast<Days>(nextMonth);
+    std::cout << DayName(today) << "는 " << today + 1 << "번째 요일이다.\n";
+    
+    // 열거형 타입의 요소로부터 int 또는 float으로 변환은 다음과 같다.
+    float one = static_cast<float>(today);
+    std::cout << DayName(today) << "는 " << one + 1 << "번째 요일\n";
+    
+
+    /// 일반 변수를 rvalue로 변환 ///
+    int s = 10;
+    const int& cs = s;
+    std::cout << static_cast<int&&>(s); 
+    return 0;
+}   
+
+// 3. dynamic_cast
+
+class Base{
+    int state;
+public:
+    Base() : state(0) {}
+    Base(int i) : state(i) {}
+    virtual int dummy() {
+        std::cout << "Base dummy() 호출\n";
+        return state;
+    }
+};
+
+// Derived class 
+class Derived : public Base{
+public:
+    Derived(int i) : Base(i) {}
+    void SetNumber(int i){
+        number = i;
+    }
+    int number;
+};
+
+int run3()
+{
+    Derived* pd;
+    // 암시적 변환으로 Derived 객체를 Base로 만든다
+    Base* pba = new Derived(23);
+
+    pd = dynamic_cast<Derived*>(pba);
+    if(nullptr == pd)std::cout << "첫 번째 pba 객체의 변환 실패\n";
+
+    pd->SetNumber(10);
+    std::cout << pd->number << "\n";
+    std::cout << pd->dummy() << "\n";
+    delete pba;
+
+    Base* pbb = new Base(568);
+    pd = dynamic_cast<Derived*>(pbb);
+    if(nullptr == pd)std::cout << "두 번째 pbb 객체의 변환 실패\n";
+
+    pd = static_cast<Derived*>(pbb);
+    pd->SetNumber(110);
+    std::cout << pd->number << "\n";
+    std::cout << pd->dummy() << "\n";
+    delete pbb;
+    return 0;
+}
+
 
