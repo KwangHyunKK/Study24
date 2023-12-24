@@ -50,3 +50,11 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+
+# Block makefile
+build/
+*.json
+*.o
+*.out
+main
