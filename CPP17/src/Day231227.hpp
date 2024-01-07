@@ -197,5 +197,6 @@ namespace Day231227
 
         // promise 객체를 전달하는 인수는 반드시 rvalue 참조를 사용
         // 그렇지 않으면 중복, 에러 발생
+        return 0;
     }
 }
