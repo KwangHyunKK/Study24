@@ -2,6 +2,7 @@
 #include "src/Day231224.hpp"
 #include "src/Day231227.hpp"
 #include "src/Day240107.hpp"
+#include "src/Day240124.hpp"
 
 int main(int, char**){
     // std::cout << "Hello, from Prac!\n";
@@ -24,16 +25,21 @@ int main(int, char**){
     // std::cout << "\n-------------------condition_variable---------\n";
     // Day231227::run8();
 
-    std::cout << "\n=========Day240107.hpp===========\n";
-    Date240107::func1();
-    std::cout << "\n=============func1()===========\n";
-    Date240107::func2();
-    std::cout << "\n=============func2()===========\n";
-    Date240107::func3();
-    std::cout << "\n=============func3()===========\n";
-    Date240107::func4();
-    std::cout << "\n=============func4()===========\n";
-    Date240107::func5();
-    std::cout << "\n=============func5()===========\n";
+    // std::cout << "\n=========Day240107.hpp===========\n";
+    // Date240107::func1();
+    // std::cout << "\n=============func1()===========\n";
+    // Date240107::func2();
+    // std::cout << "\n=============func2()===========\n";
+    // Date240107::func3();
+    // std::cout << "\n=============func3()===========\n";
+    // Date240107::func4();
+    // std::cout << "\n=============func4()===========\n";
+    // Date240107::func5();
+    // std::cout << "\n=============func5()===========\n";
+
+    Day240124::run1();
+    std::cout << "\n============\n";
+    Day240124::run2();
+    
     return 0;
 }
