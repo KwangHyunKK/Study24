@@ -3,6 +3,7 @@
 #include "src/Day231227.hpp"
 #include "src/Day240107.hpp"
 #include "src/Day240124.hpp"
+#include "src/Day240125.hpp"
 
 int main(int, char**){
     // std::cout << "Hello, from Prac!\n";
@@ -37,9 +38,15 @@ int main(int, char**){
     // Date240107::func5();
     // std::cout << "\n=============func5()===========\n";
 
-    Day240124::run1();
+    // Day240124::run1();
+    // std::cout << "\n============\n";
+    // Day240124::run2();
+
+    Day240125::run1();
     std::cout << "\n============\n";
-    Day240124::run2();
+    Day240125::run2();
+    std::cout << "\n============\n";
+    Day240125::run3();
     
     return 0;
 }
