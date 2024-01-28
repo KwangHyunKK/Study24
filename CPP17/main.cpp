@@ -4,6 +4,7 @@
 #include "src/Day240107.hpp"
 #include "src/Day240124.hpp"
 #include "src/Day240125.hpp"
+#include "src/Day240128.hpp"
 
 int main(int, char**){
     // std::cout << "Hello, from Prac!\n";
@@ -42,11 +43,12 @@ int main(int, char**){
     // std::cout << "\n============\n";
     // Day240124::run2();
 
-    Day240125::run1();
-    std::cout << "\n============\n";
-    Day240125::run2();
-    std::cout << "\n============\n";
-    Day240125::run3();
-    
+    // Day240125::run1();
+    // std::cout << "\n============\n";
+    // Day240125::run2();
+    // std::cout << "\n============\n";
+    // Day240125::run3();
+
+    Day240128::run1();
     return 0;
 }
