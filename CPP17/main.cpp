@@ -8,6 +8,7 @@
 #include "src/Day240206.hpp"
 #include "src/Day240209.hpp"
 #include "src/Day240211.hpp"
+#include "src/Day240225.hpp"
 
 int main(int, char**){
     // std::cout << "Hello, from Prac!\n";
@@ -58,6 +59,9 @@ int main(int, char**){
     // Day240206::run2();
 
     // Day240209::Prac1::run1();
-    Day240211::run1();
+    // Day240211::run1();
+
+    // Day240225::run1();
+    Day240225::run5();
     return 0;
 }

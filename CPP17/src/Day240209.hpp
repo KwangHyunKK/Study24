@@ -67,6 +67,7 @@ namespace Day240209
 
         int run2()
         {
+            return 0;
         }
 
     }
