@@ -1,5 +1,6 @@
 mod pr;
+mod baek_joon;
 
 fn main() {
-    pr::dd0606::run();
+    pr::dd0609::run();
 }
