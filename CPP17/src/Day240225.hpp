@@ -279,5 +279,5 @@ namespace Day240225
         }
     private:
         std::vector<EventHandler> listeners;
-    }
+    };
 }
