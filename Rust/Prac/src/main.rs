@@ -1,8 +1,8 @@
-use pr::dd0615;
+use baek_joon::p13335;
 
 mod pr;
 mod baek_joon;
 
 fn main() {
-    pr::dd0615::run();
+    p13335::run();
 }
