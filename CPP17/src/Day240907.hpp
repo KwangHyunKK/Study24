@@ -117,6 +117,83 @@ namespace d240907
         return 0;
     }
 
+    // # 3. Convex Hull Trick
+    // A technique for efficiently solving the problem of minimization or maximization of linear functions in dynamic programming(DP).
+    // It is primarily used to optimize DP, and helps to quickly find the best value among multiple linear functions using Convex Hull.
+    // This technique usually allows use to reduce the time complexity from O(n^2) to O(n log n) or O(n) .
+
+    class ConvexHullTrick
+    {
+        struct Line
+        {
+            long long slope, intercept;
+
+            double intersect(const Line& other) const
+            {
+                return (double)(other.intercept - intercept) / (slope - other.slope);
+            }
+        };
+
+        deque<Line> hull;
+
+    public:
+        void addLine(long long slope, long long intercept)
+        {
+            Line newLine = {slope, intercept};
+            while(hull.size() >= 2)
+            {
+                if(newLine.intersect(hull[hull.size() - 2]) <= hull.back().intersect(hull[hull.size() - 2]))
+                {
+                    hull.pop_back();
+                }
+                else
+                    break;
+            }
+            hull.push_back(newLine);
+        }
+
+        long long getMinValue(long long x)
+        {
+            while(hull.size() >= 2 && hull[1].intercept + hull[1].slope * x <= hull[0].intercept + hull[0].slope * x)
+            {
+                hull.pop_front();
+            }
+
+            return hull[0].intercept + hull[0].slope * x;
+        }
+    };
+
+    int run3()
+    {
+        int n;
+        cin >> n;
+
+        vector<long long> a(n), b(n), dp(n);
+
+        for (int i=0;i<n;++i) cin >> a[i];
+        for(int i=0;i<n;++i) cin >> b[i];
+
+        ConvexHullTrick cht;
+
+        d[0] = 0;
+        cht.addLine(b[0], dp[0]);
+
+        for(int i=1;i<n;++i)
+        {
+            dp[i] = cht.getMinValue(a[i]);
+            cht.addLine(b[i],dp[i]);
+        }
+
+        std::cout << "최종 결과 : " << dp[n-1] << "\n";
+        return 0;
+    }
+
+    // # 4. segment tree
+
+    
+
+
+
 
     int run()
     {
