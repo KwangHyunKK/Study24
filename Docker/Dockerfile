@@ -22,6 +22,7 @@ RUN apt update && \
     python3-pip \
     ufw && \
     apt clean && rm -rf /var/lib/apt/lists/*
+    apt-get install -y iputils-ping
 
 # 기본 작업 디렉토리 설정
 WORKDIR /workspace
