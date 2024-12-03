@@ -6,33 +6,57 @@
 #include <functional>
 #include <string>
 #include <vector>
+#include <chrono>
+#include <map>
 
 namespace D241204
 {
+    // Message Structure
+    struct Message
+    {
+        int id; // Producer/Consumer - specific ID
+        string content; // Message content
+        Message(int _id, string _content) : id(_id), content(_content){}
+    };
+
     // Template based message communication code # 1
-    template<typename T>
+    template<typename T = Message>
     class MessageQueue
     {
     private:
-        std::queue<T> queue; // message queue
+        map<int, queue<Message>> queues; // Map of ID-specific queues
         std::mutex mx;
         std::condition_variable cv;
     public:
-        // append message
-        void produce(const T& message)
+        // Produce a message for a specific ID
+        bool produce(int id, const Message& message, int timeout_ms = 1000)
         {
-            std::unique_lock<std::mutex> lock(mx);
-            queue.push(message);
-            cv.notify_one();
+            std::unique_lock<std::mutex> lock(mx, std::defer_lock);
+            // if(!lock.try_lock_for(chrono::milliseconds(timeout_ms)))
+            // {
+            //     throw runtime_error("Mutex lock timeout during produce!");
+            // }
+            queues[id].push(message);
+            cv.notify_all(); // Notify all consumers
+            return true;
         }
 
-        // consume message
-        T consume()
+        // consume message for a specific ID
+        T consume(int id, int timeout_ms = 1000)
         {
             std::unique_lock<std::mutex> lock(mx);
-            cv.wait(lock, [this]() {return !queue.empty(); });
-            T message = queue.front();
-            queue.pop();
+            if(!cv.wait_for(lock, chrono::milliseconds(timeout_ms), [this, id](){
+                return queues.find(id) != queues.end() && !queues[id].empty();
+            })){
+                throw runtime_error("Timeout while waiting for a message!");
+            }
+
+            Message message = queues[id].front();
+            queues[id].pop();
+            if(queues[id].empty())
+            {
+                queues.erase(id);
+            }
             return message;
         }
     };
@@ -50,48 +74,71 @@ namespace D241204
         }
     };
 
-    class Task1
+    class Task2
     {
     private:
-        static void producer(MessageQueue<std::string>& mq, Logger& logger, int id)
+        // Producer function
+        static void producer(MessageQueue<Message>& mq, Logger& logger, int id, int num_messages)
         {
-            for(int i=0;i<5;++i)
+            for(int i=0;i<num_messages;++i)
             {
-                std::string message = "Message " + std::to_string((i + 1) * id) + " from Producer " + std::to_string(id);
-                mq.produce(message);
-                logger.log("Produced: " + message);
-                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                try
+                {
+                    Message message(id, "Message " + to_string(i + 1));
+                    logger.log("Producer + " + to_string(id) + " produced : " + message.content);
+                    mq.produce(id, message);
+                    this_thread::sleep_for(chrono::milliseconds(91));
+                }catch(const exception& e)
+                {
+                    logger.log("Producer err : " + string(e.what()));
+                }
             }
         }
 
-        static void consumer(MessageQueue<std::string>& mq, Logger& logger, int id)
+        // Consumer function
+        static void consumer(MessageQueue<Message>& mq, Logger& logger, int id, int num_messages)
         {
-            for(int i=0;i<5;++i)
+            for(int i=0;i<num_messages;++i)
             {
-                auto message = mq.consume();
-                logger.log("Consumer " + std::to_string((i + 1) * id) + " consumed : " + message);
-                std::this_thread::sleep_for(std::chrono::milliseconds(130));
+                try
+                {
+                    Message message = mq.consume(id);
+                    logger.log("consumer + " + to_string(id) + " consumed : " + message.content);
+                }catch(const exception& e)
+                {
+                    logger.log("Consumer error : " + string(e.what()));
+                }
+                this_thread::sleep_for(chrono::milliseconds(100)); 
             }
         }
+
     public:
         static int Run()
         {
-            MessageQueue<std::string> mq;
+            MessageQueue mq;
             Logger logger;
+            int num_processes = 3;
+            int num_consumers = 3;
+            int num_messages = 5;
 
-            std::vector<std::thread> threads;
-            threads.emplace_back(std::thread(producer, std::ref(mq), std::ref(logger), 1));
-            threads.emplace_back(std::thread(producer, std::ref(mq), std::ref(logger), 2));
-            threads.emplace_back(std::thread(consumer, std::ref(mq), std::ref(logger), 1));
-            threads.emplace_back(std::thread(consumer, std::ref(mq), std::ref(logger), 2));
+            vector<thread> threads;
+
+            for(int i=0;i<num_consumers;++i)
+            {
+                threads.emplace_back(thread(consumer, ref(mq), ref(logger), i + 1, num_messages));
+            }
+
+            for(int i=0;i<num_processes;++i)
+            {
+                threads.emplace_back(thread(producer, ref(mq), ref(logger), i + 1, num_messages));
+            }
 
             for(auto& thread : threads)
             {
                 if(thread.joinable())thread.join();
             }
 
-            logger.log("All threads finished \n");
-
+            cout << "All threads finished \n";
             return 0;
         }
     };
