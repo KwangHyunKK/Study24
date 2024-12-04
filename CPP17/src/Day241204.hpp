@@ -66,11 +66,22 @@ namespace D241204
     {
     private:
         std::mutex log_mx;
+
+        // Get current timestamp in string format
+        string get_timestamp()
+        {
+            auto now = chrono::system_clock::now();
+            auto in_time_t = chrono::system_clock::to_time_t(now);
+            auto ms = chrono::duration_cast<chrono::milliseconds>(now.time_since_epoch()) % 1000;
+            stringstream ss;
+            ss << put_time(localtime(&in_time_t), "%Y-%m-%d %H:%M:%S") << "." << ms.count();
+            return ss.str();
+        }
     public:
         void log(const std::string& message)
         {
             std::lock_guard<std::mutex> lock(log_mx);
-            std::cout << "[LOG] : " << message << "\n";
+            std::cout << "[" << get_timestamp() << "] [LOG] : " << message << "\n";
         }
     };
 
