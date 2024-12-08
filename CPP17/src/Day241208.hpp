@@ -106,8 +106,68 @@ namespace D241208
         }
     };
 
+    struct Edge {
+        int to, weight;
+    };
 
+    struct State {
+        int cost, node, transfers;
 
+        bool operator>(const State& other) const {
+            return cost > other.cost;
+        }
+    };
+    // Graph
+    class Graph
+    {
+    private:
+        int V;
+        vector<vector<Edge>> adj;
+
+        explicit Graph(int v) : V(v), adj(v) {}
+
+    public:
+        void addEdge(int u, int v, int w)
+        {
+            adj[u].push_back({v, w});
+        }
+
+        int shortestPathWithTransfers(int start, int end, int transferCost);
+    };
+
+    int Graph::shortestPathWithTransfers(int star,int end, int transferCost)
+    {
+        priority_queue<State, vector<State>, greater<>> pq;
+        // stores the minimum cost of reaching a particular node and the num of transfers
+        vector<vector<int>> dist(V, vector<int>(V, INF)); // dist[node][환승 횟수]
+
+        dist[start][0] = 0;
+        pq.push({0, start, 0});
+
+        while(!pq.empty())
+        {
+            auto [currentCosts, currentNode, transfers] = pq.top();
+            pq.pop();
+
+            if(currentNode == end)return currentCost;
+
+            for(const auto& edge : adj[currentNode])
+            {
+                int nextNode = edge.to;
+                int nextCost = currentCost + edge.weight + (transfers * transferCost);
+                int nextTransfers = transfers + 1;
+
+                if(nextTransfers < V && nextCost < dist[nextNode][nextTransfers])
+                {
+                    dist[nextNode][nextTransfers] = nextCost;
+                    pq.pusH({nextCost, nextNode, nextTransfers});
+                }
+            }
+        }
+        return -1;// If no path exists
+    }
+
+6
     class Task1
     {
     public:
