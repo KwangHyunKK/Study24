@@ -2,6 +2,9 @@
 #include <vector>
 #include <algorithm>
 #include <numeric>
+#include <cstdint>
+#include <tuple>
+#include <limits>
 using namespace std;
 
 namespace D241208
@@ -61,6 +64,50 @@ namespace D241208
         }
     };
 
+    // CRC 
+    class CRC32
+    {
+    private:
+        // const var for CRC-32
+        static const uint32_t CRC32_POLYNOMIAL = 0xEDB88320;
+
+    public:
+        static vector<uint32_t> generateCRCTable()
+        {
+            vector<uint32_t> table(256);
+            for(uint32_t i =0;i<256;++i)
+            {
+                uint32_t crc = i;
+                for(int j=0;j<8;++j)
+                {
+                    if(crc & 1)
+                    {
+                        crc = (crc >> 1) ^ CRC32_POLYNOMIAL;
+                    }
+                    else
+                    {
+                        crc >>= 1;
+                    }
+                }
+                table[i] = crc;
+            }
+            return table;
+        }
+
+        static uint32_t calculateCRC(const vector<uint8_t>& data, const vector<uint32_t>& table)
+        {
+            uint32_t crc = 0xFFFFFFFF;
+            for(uint8_t byte : data)
+            {
+                uint8_t index = (crc ^ byte) & 0xFF;
+                crc = (crc >> 8) ^ table[index];
+            }
+            return crc ^ 0xFFFFFFFF; 
+        }
+    };
+
+
+
     class Task1
     {
     public:
@@ -82,6 +129,49 @@ namespace D241208
 
             uf.unite(7, 8);
             cout << "5 and 9 connected after union: " << (uf.isConn(5, 9) ? "Yes" : "No") << endl;
+            return 0;
+        }
+    };
+
+    class Task2
+    {
+    public:
+        static int Run()
+        {
+            /// The generateCRCTable function generates a table used by the CRC-32 arlgorithm.
+            /// This table is used to speed up CRC calculations.
+            vector<uint32_t> crcTable = CRC32::generateCRCTable();
+
+            // 테스트 데이터
+            vector<uint8_t> data = {0x48, 0x65, 0x6C, 0x6C, 0x6F}; // "Hello" 문자열
+            cout << "Input data: ";
+            for (uint8_t byte : data) {
+                cout << hex << static_cast<int>(byte) << " ";
+            }
+            cout << endl;
+
+            // CRC 계산
+            uint32_t crc = CRC32::calculateCRC(data, crcTable);
+            cout << "Calculated CRC32: 0x" << hex << crc << endl;
+
+            // CRC 확인 (예: 데이터 끝에 CRC 추가 후 검증)
+            // CRC32 -> uint8_t * 4
+            data.push_back((crc >> 24) & 0xFF); 
+            data.push_back((crc >> 16) & 0xFF);
+            data.push_back((crc >> 8) & 0xFF);
+            data.push_back(crc & 0xFF);
+
+            /// After adding the CRC value at the end of the data,
+            /// recalculate and if 0 comes out, the verfication is judged to be successful.
+            uint32_t newCRC = CRC32::calculateCRC(data, crcTable);
+            cout << "Validation CRC32: 0x" << hex << newCRC << endl;
+
+            if (newCRC == 0) {
+                cout << "CRC check passed!" << endl;
+            } else {
+                cout << "CRC check failed!" << endl;
+            }
+
             return 0;
         }
     };
