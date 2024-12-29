@@ -53,46 +53,32 @@ namespace D241229
     // LCS algorithm for line comparision
     std::deque<std::pair<std::string, std::string>> computeLCS(const std::vector<std::string>& oldLines, const std::vector<std::string>& newLines)
     {
-        size_t m = oldLines.size();
-        size_t n = newLines.size();
-
-        std::vector<std::vector<int>> lcs(m + 1, std::vector<int>(n+1, 0));
-
-        for(size_t i=1;i<=m;++i)
-        {
-            for(size_t j = 1;j<=n;++j)
-            {
-                if(oldLines[i-1] == newLines[j-1])
-                {
-                    lcs[i][j] = lcs[i-1][j-1] + 1;
-                }
-                else{
-                    lcs[i][j] = std::max(lcs[i-1][j], lcs[i][j-1]);
-                }
-            }
-        }
-
+        size_t i = 0, j = 0;
+        size_t m = oldLines.size(), n = newLines.size();
         std::deque<std::pair<std::string, std::string>> result;
 
-        size_t i = m, j = n;
-        while(i > 0 || j > 0)
+        while(i < m && j < n)
         {
-            if(i > 0 && j > 0 && oldLines[i-1] == newLines[j-1])
+            if(oldLines[i] == newLines[j])
             {
-                result.push_front({" ", oldLines[i-1]});
-                --i; --j;
+                result.emplace_back(" ", oldLines[i]);
+                ++i; ++j;
             }
-            else if(j > 0 && (i == 0 || lcs[i][j-1] >= lcs[i-1][j]))
+            else if((j < n-1 && oldLines[i] == newLines[j + 1]))
             {
-                result.push_front({"+", newLines[j-1]});
-                --j;
+                result.emplace_back("+", newLines[j]);
+                ++j;
             }
             else
             {
-                result.push_front({"-", oldLines[i-1]});
-                --i;
+                result.emplace_back("-", oldLines[i]);
+                ++i;
             }
         }
+        
+        while(i < m) result.emplace_back("-", oldLines[i++]);
+        while(j < n) result.emplace_back("+", newLines[j++]);
+
         return result;
     }
 
