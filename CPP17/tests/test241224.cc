@@ -1,5 +1,5 @@
 #include <gtest/gtest.h>
-#include "../src/Day241224.hpp"
+#include "../src/Before25/Day241224.hpp"
 #include <iostream>
 using namespace D241224;
 

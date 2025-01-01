@@ -196,7 +196,7 @@ namespace D241222
             }
             else
             {
-                std::cerr << "Actor " << actor_id << "is not available.\n";
+                std::cerr << "Actor " << actor_id << " is not available.\n";
                 std::promise<void> p;
                 p.set_exception(std::make_exception_ptr(std::runtime_error("Actor not available")));
                 return p.get_future();

@@ -117,6 +117,8 @@ namespace D241208
             return cost > other.cost;
         }
     };
+
+    const int INF = numeric_limits<int>::max();
     // Graph
     class Graph
     {
@@ -135,7 +137,7 @@ namespace D241208
         int shortestPathWithTransfers(int start, int end, int transferCost);
     };
 
-    int Graph::shortestPathWithTransfers(int star,int end, int transferCost)
+    int Graph::shortestPathWithTransfers(int start,int end, int transferCost)
     {
         priority_queue<State, vector<State>, greater<>> pq;
         // stores the minimum cost of reaching a particular node and the num of transfers
@@ -146,7 +148,7 @@ namespace D241208
 
         while(!pq.empty())
         {
-            auto [currentCosts, currentNode, transfers] = pq.top();
+            auto [currentCost, currentNode, transfers] = pq.top();
             pq.pop();
 
             if(currentNode == end)return currentCost;
@@ -160,14 +162,13 @@ namespace D241208
                 if(nextTransfers < V && nextCost < dist[nextNode][nextTransfers])
                 {
                     dist[nextNode][nextTransfers] = nextCost;
-                    pq.pusH({nextCost, nextNode, nextTransfers});
+                    pq.push({nextCost, nextNode, nextTransfers});
                 }
             }
         }
         return -1;// If no path exists
     }
 
-6
     class Task1
     {
     public:

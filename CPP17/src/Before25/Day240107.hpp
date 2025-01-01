@@ -144,9 +144,4 @@ namespace Date240107
         return 0;
     }
 
-    int func6()
-    {
-        
-    }
-
 }

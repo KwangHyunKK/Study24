@@ -141,5 +141,5 @@ namespace D241229
             }
         }
     };
-    
+    // https://stackoverflow.com/questions/15080231/c-variable-stdifstream-ifs-has-initializer-but-incomplete-type
 }
