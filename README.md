@@ -17,6 +17,18 @@ $ docker ps # 실행 중인 컨테이너 확인
 $ docker restart
 ```
 
+### WSL 사용
+
+- wsl 확인
+```
+$ wsl -l -v
+  NAME              STATE           VERSION
+* Ubuntu-24.04      Running         2
+  docker-desktop    Running         2
+```
+
+- Connect to WSL using Distro -> vs code 연결
+
 
 ### Ubuntu setting
 
