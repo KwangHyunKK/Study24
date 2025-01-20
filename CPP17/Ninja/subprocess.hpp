@@ -59,7 +59,7 @@
 
 /// ########### My Opinion ############
 
-namespace JinjaLearn
+namespace NinjaLearn
 {
     class Subprocess
     {
