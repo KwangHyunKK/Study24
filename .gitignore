@@ -64,3 +64,7 @@ peda*
 
 # .token
 *token*
+
+# cmake files
+_deps/
+CMakeFiles/
