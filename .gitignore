@@ -67,3 +67,7 @@ CPP17/CMakeFiles/
 
 # .token
 *token*
+
+# cmake files
+_deps/
+CMakeFiles/
