@@ -34,6 +34,7 @@ namespace Y25M3
             progress_ = std::clamp(value, 0.0f, 1.0f);
         }
 
+        // 진행도를 동적으로 업데이트 할 수 있도록  std::function<float()> 을 사용해 외부 값 바인딩 가능능
         void bindingProgress(std::function<float()> updater)
         {
             progressUpdater_ = updater;
@@ -46,6 +47,7 @@ namespace Y25M3
         std::mutex printMutex_;
         std::thread updateThread_;
 
+        // 60Hz (16.67ms) 간격으로 진행도 출력하며, progressUpdater 가 설정된 경우 자동으로 update
         void updateLoop()
         {
             while(running_)
