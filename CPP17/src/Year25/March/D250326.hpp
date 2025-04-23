@@ -106,7 +106,7 @@ namespace Y25M3
             }
 
             {
-                std::lock_guard<std::mutex> locK(queueMutex_);
+                std::lock_guard<std::mutex> lock(queueMutex_);
                 packetQueue_.emplace(buffer, buffer + packet_size);
             }
             queueCV_.notify_one();
