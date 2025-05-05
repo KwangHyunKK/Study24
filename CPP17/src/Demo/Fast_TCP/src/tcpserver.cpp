@@ -190,6 +190,111 @@ namespace Demo
             }
         } // worker_loop
 
+        void TcpServerPartitioned::set_nonblocking(int sock)
+        {
+            int flags = fcntl(sock, F_GETFL, 0);
+            fcntl(sock, F_SETFL, flags | O_NONBLOCK);
+        } // set_nonblocking
+
+        void TcpServerPartitioned::start()
+        {
+            server_sock_ = socket(AF_INEt, SOCK_STREAM, 0);
+            assert(server_sock_ >= 0);
+
+            sockaddr_in addr{};
+            addr.sin_family = AF_INET;
+            addr.sin_addr.s_addr = INADDR_ANY;
+            addr.sin_port = htons(port_);
+
+            int opt = 1;
+            setsockpot(server_sock_, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(opt));
+            assert(bind(server_sock_, (sockaddr*)&addr, sizeof(addr)) >= 0);
+            assert(listen(server_sock_, 128) >= 0);
+
+            set_nonblocking(server_sock_);
+
+            running_ = true;
+
+            for(int i=0;i<MAX_WORKER_THREADS;++i)
+            {
+                WorkerContext ctx;
+                ctx.epoll_fd = epoll_create1(0);
+                assert(ctx.epoll_fd >= 0);
+
+                ctx.thread = std::thread(&TcpServerPartitioned::worker_loop, this, i);
+                workers_.push_back(std::move(ctx));
+            }
+
+            std::thread(&TcpServerPartitioned::accept_loop, this).detach();
+        } // start
+
+        void TcpServerPartitioned::stop()
+        {
+            running_ = false;
+            close(server_sock_);
+
+            for(auto& worker: workers_)
+            {
+                close(worker.epoll_fd);
+                if(worker.thread.joinable())
+                    worker.thread.join();
+            }
+        } // stop
+
+        void TcpServerPartitioned::accept_loop()
+        {
+            while(running_)
+            {
+                sockaddr_in client_addr;
+                socklen_t len = sizeof(client_addr);
+                int client_sock = accept(server_sock_, (sockaddr*)&client_addr, &len);
+
+                if(client_sock >= 0)
+                {
+                    set_nonblocking(client_sock);
+
+                    int worker_id = next_worker_.fetch_add(1) % MAX_WORKER_THREADS;
+                    int epoll_fd = workers_[worker_id].epoll_fd;
+
+                    epoll_event ev{};
+                    ev.events = EPOLLIN | EPOLLET;
+                    ev.data.fd = client_sock;
+                    epoll_ctl(epoll_fd, EPOLL_CTL_ADD, client_sock, &ev);
+                }
+            }
+        } // accept_loop
+
+        void TcpServerPartitioned::worker_loop(int worker_id)
+        {
+            int epoll_fd = workers_[worker_id].epoll_fd;
+            epoll_event events[MAX_EVENTS];
+
+            while(running_)
+            {
+                int n = epoll_wait(epoll_fd, events, MAX_EVENTS, 1000);
+
+                for(int i=0;i<n;++i)
+                {
+                    int fd = events[i].data.fd;
+
+                    char buffer[BUFFER_SIZE];
+                    while(true)
+                    {
+                        int bytes = recv(fd, buffer, sizeof(buffer), 0);
+                        if(bytes < =0)
+                        {
+                            if(errno !+ EAGAIN && errno != EWOULDBLOCK)
+                            {
+                                close(fd);
+                            }
+                            break;
+                        }
+                        send(fd, buffer, bytes, 0); // ECho
+                    }
+                }
+            }
+        }
+
     } // namespace Fast_Tcp
 } // namespace Demo
 
