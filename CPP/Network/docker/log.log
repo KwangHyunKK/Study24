@@ -1,0 +1,518 @@
+hyun@DESKTOP-95G88MB:~/Study24_repo/CPP/Network/docker$ docker-compose up --build
+[+] Running 0/0
+[+] Running 0/1erBuilding 0.0s 
+[+] Building 1.0s (7/8) docker:default 
+ => [server internal] load build definition from Dockerfile 0.0s
+ => => transferring dockerfile: 505B0.0s
+[+] Building 1.8s (20/20) FINISHEDdocker:default 
+ => [server internal] load build definition from Dockerfile 0.0s
+ => => transferring dockerfile: 505B0.0s
+ => [client1 internal] load metadata for docker.io/library/ubuntu:latest1.1s
+ => [server internal] load .dockerignore0.0s
+ => => transferring context: 2B 0.0s
+ => [client3 1/3] FROM docker.io/library/ubuntu:latest@sha256:440dcf6a5640b2ae5c77724e68787a906afb8ddee98bf86db94eea8528c2c0760.0s
+ => CACHED [client3 2/3] RUN apt update && apt upgrade -y && apt install -y build-essential net-tools ufw && mkdir /workspace 0.0s
+ => CACHED [client3 3/3] WORKDIR /workspace 0.0s
+ => [server] exporting to image 0.1s
+ => => exporting layers 0.0s 
+ => => writing image sha256:39a9f57f790730c13282581743b4986994dfa7370d137d30d04f0bfb5c6e92850.0s 
+ => => naming to docker.io/library/echo-server:latest 0.0s 
+ => [server] resolving provenance for metadata file 0.0s 
+ => [client1 internal] load build definition from Dockerfile0.0s
+ => => transferring dockerfile: 500B0.0s
+ => [client3 internal] load build definition from Dockerfile0.1s 
+ => => transferring dockerfile: 500B0.0s 
+ => [client2 internal] load build definition from Dockerfile0.1s 
+ => => transferring dockerfile: 500B0.0s 
+ => [client3 internal] load .dockerignore 0.0s 
+ => => transferring context: 2B 0.0s
+ => [client2 internal] load .dockerignore 0.0s
+ => => transferring context: 2B 0.0s
+ => [client1 internal] load .dockerignore 0.0s
+ => => transferring context: 2B 0.0s
+ => [client2] exporting to image0.0s
+ => => exporting layers 0.0s
+ => => writing image sha256:8a33c49b78e1d7ee443eae0b81804440a7bbd0a2a6ac80bde1508f3551affc180.0s
+ => => naming to docker.io/library/echo-client:latest 0.0s 
+ => [client1] exporting to image0.0s 
+ => => exporting layers 0.0s 
+ => => writing image sha256:5a7b2802c7d8d6aeb6a2f25b22913a8a51ba5d237b1bc4a383c92778ab4eda9d0.0s 
+ => => naming to docker.io/library/echo-client:latest 0.0s
+ => [client3] exporting to image0.0s
+ => => exporting layers 0.0s
+[+] Running 8/4image sha256:48c81c10faf8cdf5e20f1b8037d83f5c218ed655829568712159696a0458b4db0.0s
+ ✔ Service serverBuilt1.1s 
+ ✔ Service client2 Built0.8s 
+ ✔ Service client3 Built0.8s 
+ ✔ Service client1 Built0.8s 
+ ✔ Container echo_server Created0.0s 
+ ✔ Container echo_client1Created0.0s 
+ ✔ Container echo_client3Created0.0s 
+ ✔ Container echo_client2Created0.0s 
+Attaching to echo_client1, echo_client2, echo_client3, echo_server
+echo_server | Echo server listening on port 12345...
+echo_server | Connected from 172.18.0.4:49488
+echo_client3| success to connect : 0x55b59fb28370[Client 333] Send to Server : Hello from client 333 1
+echo_server | Received : Hello from client 333 1
+echo_server | Received : Hello from client 333 2
+echo_server | Received : Hello from client 333 3
+echo_server | Received : Hello from client 333 4
+echo_server | Received : Hello from client 333 5
+echo_server | Received : Hello from client 333 6
+echo_server | Received : Hello from client 333 7
+echo_client3| [Client 333] Echoed from server : Hello from client 333 1
+echo_server | Received : Hello from client 333 8
+echo_client3| [Client 333] Send to Server : Hello from client 333 2
+echo_client3| [Client 333] Echoed from server : Hello from client 333 2
+echo_client3| [Client 333] Send to Server : Hello from client 333 3
+echo_server | Received : Hello from client 333 9
+echo_client3| [Client 333] Echoed from server : Hello from client 333 3
+echo_server | Received : Hello from client 333 10
+echo_client3| [Client 333] Send to Server : Hello from client 333 4
+echo_server | Received : Hello from client 333 11
+echo_client3| [Client 333] Echoed from server : Hello from client 333 4
+echo_server | Received : Hello from client 333 12
+echo_client3| [Client 333] Send to Server : Hello from client 333 5
+echo_server | Received : Hello from client 333 13
+echo_client3| [Client 333] Echoed from server : Hello from client 333 5
+echo_server | Received : Hello from client 333 14
+echo_client3| [Client 333] Send to Server : Hello from client 333 6
+echo_server | Received : Hello from client 333 15
+echo_client3| [Client 333] Echoed from server : Hello from client 333 6
+echo_server | Received : Hello from client 333 16
+echo_client3| [Client 333] Send to Server : Hello from client 333 7
+echo_server | Received : Hello from client 333 17
+echo_client3| [Client 333] Echoed from server : Hello from client 333 7
+echo_server | Received : Hello from client 333 18
+echo_client3| [Client 333] Send to Server : Hello from client 333 8
+echo_server | Received : Hello from client 333 19
+echo_client3| [Client 333] Echoed from server : Hello from client 333 8
+echo_server | Received : Hello from client 333 20
+echo_client3| [Client 333] Send to Server : Hello from client 333 9
+echo_server | Received : Hello from client 333 21
+echo_client3| [Client 333] Echoed from server : Hello from client 333 9
+echo_server | Received : Hello from client 333 22
+echo_client3| [Client 333] Send to Server : Hello from client 333 10
+echo_server | Received : Hello from client 333 23
+echo_server | Received : Hello from client 333 24
+echo_server | Received : Hello from client 333 25
+echo_client3| [Client 333] Echoed from server : Hello from client 333 10
+echo_server | Received : Hello from client 333 26
+echo_client3| [Client 333] Send to Server : Hello from client 333 11
+echo_server | Received : Hello from client 333 27
+echo_client3| [Client 333] Echoed from server : Hello from client 333 11
+echo_client3| [Client 333] Send to Server : Hello from client 333 12
+echo_client3| [Client 333] Echoed from server : Hello from client 333 12
+echo_server | Received : Hello from client 333 28
+echo_client3| [Client 333] Send to Server : Hello from client 333 13
+echo_server | Received : Hello from client 333 29
+echo_client3| [Client 333] Echoed from server : Hello from client 333 13
+echo_server | Received : Hello from client 333 30
+echo_server | Received : Hello from client 333 31
+echo_server | Received : Hello from client 333 32
+echo_client3| [Client 333] Send to Server : Hello from client 333 14
+echo_server | Received : Hello from client 333 33
+echo_client3| [Client 333] Echoed from server : Hello from client 333 14
+echo_server | Received : Hello from client 333 34
+echo_client3| [Client 333] Send to Server : Hello from client 333 15
+echo_server | Received : Hello from client 333 35
+echo_client3| [Client 333] Echoed from server : Hello from client 333 15
+echo_server | Received : Hello from client 333 36
+echo_server | Received : Hello from client 333 37
+echo_client3| [Client 333] Send to Server : Hello from client 333 16
+echo_server | Received : Hello from client 333 38
+echo_client3| [Client 333] Echoed from server : Hello from client 333 16
+echo_server | Received : Hello from client 333 39
+echo_client3| [Client 333] Send to Server : Hello from client 333 17
+echo_server | Received : Hello from client 333 40
+echo_client3| [Client 333] Echoed from server : Hello from client 333 17
+echo_server | Received : Hello from client 333 41
+echo_client3| [Client 333] Send to Server : Hello from client 333 18
+echo_server | Received : Hello from client 333 42
+echo_client3| [Client 333] Echoed from server : Hello from client 333 18
+echo_server | Received : Hello from client 333 43
+echo_client3| [Client 333] Send to Server : Hello from client 333 19
+echo_server | Received : Hello from client 333 44
+echo_client3| [Client 333] Echoed from server : Hello from client 333 19
+echo_server | Received : Hello from client 333 45
+echo_client3| [Client 333] Send to Server : Hello from client 333 20
+echo_server | Received : Hello from client 333 46
+echo_client3| [Client 333] Echoed from server : Hello from client 333 20
+echo_server | Received : Hello from client 333 47
+echo_client3| [Client 333] Send to Server : Hello from client 333 21
+echo_server | Received : Hello from client 333 48
+echo_server | Received : Hello from client 333 49
+echo_client3| [Client 333] Echoed from server : Hello from client 333 21
+echo_server | Received : Hello from client 333 50
+echo_client3| [Client 333] Send to Server : Hello from client 333 22
+echo_server | Connected Closed.
+echo_client3| [Client 333] Echoed from server : Hello from client 333 22
+echo_client3| [Client 333] Send to Server : Hello from client 333 23
+echo_client3| [Client 333] Echoed from server : Hello from client 333 23
+echo_client3| [Client 333] Send to Server : Hello from client 333 24
+echo_client3| [Client 333] Echoed from server : Hello from client 333 24
+echo_client3| [Client 333] Send to Server : Hello from client 333 25
+echo_client3| [Client 333] Echoed from server : Hello from client 333 25
+echo_client3| [Client 333] Send to Server : Hello from client 333 26
+echo_client3| [Client 333] Echoed from server : Hello from client 333 26
+echo_client3| [Client 333] Send to Server : Hello from client 333 27
+echo_client3| [Client 333] Echoed from server : Hello from client 333 27
+echo_client3| [Client 333] Send to Server : Hello from client 333 28
+echo_client3| [Client 333] Echoed from server : Hello from client 333 28
+echo_client3| [Client 333] Send to Server : Hello from client 333 29
+echo_client3| [Client 333] Echoed from server : Hello from client 333 29
+echo_client3| [Client 333] Send to Server : Hello from client 333 30
+echo_client3| [Client 333] Echoed from server : Hello from client 333 30
+echo_client3| [Client 333] Send to Server : Hello from client 333 31
+echo_client3| [Client 333] Echoed from server : Hello from client 333 31
+echo_client3| [Client 333] Send to Server : Hello from client 333 32
+echo_client3| [Client 333] Echoed from server : Hello from client 333 32
+echo_client3| [Client 333] Send to Server : Hello from client 333 33
+echo_client3| [Client 333] Echoed from server : Hello from client 333 33
+echo_client3| [Client 333] Send to Server : Hello from client 333 34
+echo_client3| [Client 333] Echoed from server : Hello from client 333 34
+echo_client3| [Client 333] Send to Server : Hello from client 333 35
+echo_client3| [Client 333] Echoed from server : Hello from client 333 35
+echo_client3| [Client 333] Send to Server : Hello from client 333 36
+echo_client3| [Client 333] Echoed from server : Hello from client 333 36
+echo_client3| [Client 333] Send to Server : Hello from client 333 37
+echo_client3| [Client 333] Echoed from server : Hello from client 333 37
+echo_client3| [Client 333] Send to Server : Hello from client 333 38
+echo_client3| [Client 333] Echoed from server : Hello from client 333 38
+echo_client3| [Client 333] Send to Server : Hello from client 333 39
+echo_client3| [Client 333] Echoed from server : Hello from client 333 39
+echo_client3| [Client 333] Send to Server : Hello from client 333 40
+echo_client3| [Client 333] Echoed from server : Hello from client 333 40
+echo_client3| [Client 333] Send to Server : Hello from client 333 41
+echo_client3| [Client 333] Echoed from server : Hello from client 333 41
+echo_client3| [Client 333] Send to Server : Hello from client 333 42
+echo_client3| [Client 333] Echoed from server : Hello from client 333 42
+echo_client3| [Client 333] Send to Server : Hello from client 333 43
+echo_client3| [Client 333] Echoed from server : Hello from client 333 43
+echo_client3| [Client 333] Send to Server : Hello from client 333 44
+echo_client3| [Client 333] Echoed from server : Hello from client 333 44
+echo_client3| [Client 333] Send to Server : Hello from client 333 45
+echo_client3| [Client 333] Echoed from server : Hello from client 333 45
+echo_client3| [Client 333] Send to Server : Hello from client 333 46
+echo_client3| [Client 333] Echoed from server : Hello from client 333 46
+echo_client3| [Client 333] Send to Server : Hello from client 333 47
+echo_client3| [Client 333] Echoed from server : Hello from client 333 47
+echo_client3| [Client 333] Send to Server : Hello from client 333 48
+echo_client3| [Client 333] Echoed from server : Hello from client 333 48
+echo_client3| [Client 333] Send to Server : Hello from client 333 49
+echo_client3| [Client 333] Echoed from server : Hello from client 333 49
+echo_client3| [Client 333] Send to Server : Hello from client 333 50
+echo_client3| [Client 333] Echoed from server : Hello from client 333 50
+echo_client2| success to connect : 0x557ffedd1370[Client 222] Send to Server : Hello from client 222 1
+echo_server | Connected from 172.18.0.5:52910
+echo_client1| success to connect : 0x557087b0c370[Client 111] Send to Server : Hello from client 111 1
+echo_server | Received : Hello from client 111 1
+echo_client1| [Client 111] Echoed from server : Hello from client 111 1
+echo_server | Received : Hello from client 111 2
+echo_client1| [Client 111] Send to Server : Hello from client 111 2
+echo_server | Received : Hello from client 111 3
+echo_client1| [Client 111] Echoed from server : Hello from client 111 2
+echo_server | Received : Hello from client 111 4
+echo_client1| [Client 111] Send to Server : Hello from client 111 3
+echo_server | Received : Hello from client 111 5
+echo_server | Received : Hello from client 111 6
+echo_client1| [Client 111] Echoed from server : Hello from client 111 3
+echo_server | Received : Hello from client 111 7
+echo_client1| [Client 111] Send to Server : Hello from client 111 4
+echo_server | Received : Hello from client 111 8
+echo_server | Received : Hello from client 111 9
+echo_client1| [Client 111] Echoed from server : Hello from client 111 4
+echo_server | Received : Hello from client 111 10
+echo_client1| [Client 111] Send to Server : Hello from client 111 5
+echo_server | Received : Hello from client 111 11
+echo_client1| [Client 111] Echoed from server : Hello from client 111 5
+echo_server | Received : Hello from client 111 12
+echo_client1| [Client 111] Send to Server : Hello from client 111 6
+echo_server | Received : Hello from client 111 13
+echo_client1| [Client 111] Echoed from server : Hello from client 111 6
+echo_server | Received : Hello from client 111 14
+echo_client1| [Client 111] Send to Server : Hello from client 111 7
+echo_server | Received : Hello from client 111 15
+echo_client1| [Client 111] Echoed from server : Hello from client 111 7
+echo_client2| [Client 222] Echoed from server : Hello from client 222 1
+echo_server | Received : Hello from client 111 16
+echo_client1| [Client 111] Send to Server : Hello from client 111 8
+echo_client2| [Client 222] Send to Server : Hello from client 222 2
+echo_server | Received : Hello from client 111 17
+echo_client1| [Client 111] Echoed from server : Hello from client 111 8
+echo_client2| [Client 222] Echoed from server : Hello from client 222 2
+echo_server | Received : Hello from client 111 18
+echo_client1| [Client 111] Send to Server : Hello from client 111 9
+echo_client2| [Client 222] Send to Server : Hello from client 222 3
+echo_server | Received : Hello from client 111 19
+echo_client1| [Client 111] Echoed from server : Hello from client 111 9
+echo_client2| [Client 222] Echoed from server : Hello from client 222 3
+echo_server | Received : Hello from client 111 20
+echo_client1| [Client 111] Send to Server : Hello from client 111 10
+echo_client2| [Client 222] Send to Server : Hello from client 222 4
+echo_server | Received : Hello from client 111 21
+echo_client1| [Client 111] Echoed from server : Hello from client 111 10
+echo_server | Received : Hello from client 111 22
+echo_client2| [Client 222] Echoed from server : Hello from client 222 4
+echo_client1| [Client 111] Send to Server : Hello from client 111 11
+echo_server | Received : Hello from client 111 23
+echo_client2| [Client 222] Send to Server : Hello from client 222 5
+echo_client1| [Client 111] Echoed from server : Hello from client 111 11
+echo_server | Received : Hello from client 111 24
+echo_client2| [Client 222] Echoed from server : Hello from client 222 5
+echo_client1| [Client 111] Send to Server : Hello from client 111 12
+echo_server | Received : Hello from client 111 25
+echo_client2| [Client 222] Send to Server : Hello from client 222 6
+echo_client1| [Client 111] Echoed from server : Hello from client 111 12
+echo_server | Received : Hello from client 111 26
+echo_client2| [Client 222] Echoed from server : Hello from client 222 6
+echo_client1| [Client 111] Send to Server : Hello from client 111 13
+echo_server | Received : Hello from client 111 27
+echo_client2| [Client 222] Send to Server : Hello from client 222 7
+echo_client1| [Client 111] Echoed from server : Hello from client 111 13
+echo_server | Received : Hello from client 111 28
+echo_client2| [Client 222] Echoed from server : Hello from client 222 7
+echo_client1| [Client 111] Send to Server : Hello from client 111 14
+echo_server | Received : Hello from client 111 29
+echo_client2| [Client 222] Send to Server : Hello from client 222 8
+echo_client1| [Client 111] Echoed from server : Hello from client 111 14
+echo_server | Received : Hello from client 111 30
+echo_client2| [Client 222] Echoed from server : Hello from client 222 8
+echo_client1| [Client 111] Send to Server : Hello from client 111 15
+echo_server | Received : Hello from client 111 31
+echo_client2| [Client 222] Send to Server : Hello from client 222 9
+echo_client1| [Client 111] Echoed from server : Hello from client 111 15
+echo_server | Received : Hello from client 111 32
+echo_client2| [Client 222] Echoed from server : Hello from client 222 9
+echo_client1| [Client 111] Send to Server : Hello from client 111 16
+echo_server | Received : Hello from client 111 33
+echo_client2| [Client 222] Send to Server : Hello from client 222 10
+echo_client1| [Client 111] Echoed from server : Hello from client 111 16
+echo_server | Received : Hello from client 111 34
+echo_client2| [Client 222] Echoed from server : Hello from client 222 10
+echo_client1| [Client 111] Send to Server : Hello from client 111 17
+echo_server | Received : Hello from client 111 35
+echo_client2| [Client 222] Send to Server : Hello from client 222 11
+echo_client1| [Client 111] Echoed from server : Hello from client 111 17
+echo_server | Received : Hello from client 111 36
+echo_client2| [Client 222] Echoed from server : Hello from client 222 11
+echo_client1| [Client 111] Send to Server : Hello from client 111 18
+echo_server | Received : Hello from client 111 37
+echo_client2| [Client 222] Send to Server : Hello from client 222 12
+echo_client1| [Client 111] Echoed from server : Hello from client 111 18
+echo_server | Received : Hello from client 111 38
+echo_client2| [Client 222] Echoed from server : Hello from client 222 12
+echo_client1| [Client 111] Send to Server : Hello from client 111 19
+echo_server | Received : Hello from client 111 39
+echo_client2| [Client 222] Send to Server : Hello from client 222 13
+echo_client1| [Client 111] Echoed from server : Hello from client 111 19
+echo_server | Received : Hello from client 111 40
+echo_client2| [Client 222] Echoed from server : Hello from client 222 13
+echo_client1| [Client 111] Send to Server : Hello from client 111 20
+echo_server | Received : Hello from client 111 41
+echo_client2| [Client 222] Send to Server : Hello from client 222 14
+echo_client1| [Client 111] Echoed from server : Hello from client 111 20
+echo_server | Received : Hello from client 111 42
+echo_client2| [Client 222] Echoed from server : Hello from client 222 14
+echo_client1| [Client 111] Send to Server : Hello from client 111 21
+echo_server | Received : Hello from client 111 43
+echo_client2| [Client 222] Send to Server : Hello from client 222 15
+echo_client1| [Client 111] Echoed from server : Hello from client 111 21
+echo_server | Received : Hello from client 111 44
+echo_client2| [Client 222] Echoed from server : Hello from client 222 15
+echo_client1| [Client 111] Send to Server : Hello from client 111 22
+echo_server | Received : Hello from client 111 45
+echo_client2| [Client 222] Send to Server : Hello from client 222 16
+echo_client1| [Client 111] Echoed from server : Hello from client 111 22
+echo_server | Received : Hello from client 111 46
+echo_client2| [Client 222] Echoed from server : Hello from client 222 16
+echo_client1| [Client 111] Send to Server : Hello from client 111 23
+echo_server | Received : Hello from client 111 47
+echo_client2| [Client 222] Send to Server : Hello from client 222 17
+echo_client1| [Client 111] Echoed from server : Hello from client 111 23
+echo_server | Received : Hello from client 111 48
+echo_client2| [Client 222] Echoed from server : Hello from client 222 17
+echo_client1| [Client 111] Send to Server : Hello from client 111 24
+echo_server | Received : Hello from client 111 49
+echo_client2| [Client 222] Send to Server : Hello from client 222 18
+echo_client1| [Client 111] Echoed from server : Hello from client 111 24
+echo_server | Received : Hello from client 111 50
+echo_client2| [Client 222] Echoed from server : Hello from client 222 18
+echo_client1| [Client 111] Send to Server : Hello from client 111 25
+echo_server | Connected Closed.
+echo_client2| [Client 222] Send to Server : Hello from client 222 19
+echo_client1| [Client 111] Echoed from server : Hello from client 111 25
+echo_server | Connected from 172.18.0.3:44798
+echo_client2| [Client 222] Echoed from server : Hello from client 222 19
+echo_client1| [Client 111] Send to Server : Hello from client 111 26
+echo_server | Received : Hello from client 222 1
+echo_client2| [Client 222] Send to Server : Hello from client 222 20
+echo_client1| [Client 111] Echoed from server : Hello from client 111 26
+echo_server | Received : Hello from client 222 2
+echo_client2| [Client 222] Echoed from server : Hello from client 222 20
+echo_client1| [Client 111] Send to Server : Hello from client 111 27
+echo_server | Received : Hello from client 222 3
+echo_client2| [Client 222] Send to Server : Hello from client 222 21
+echo_client1| [Client 111] Echoed from server : Hello from client 111 27
+echo_server | Received : Hello from client 222 4
+echo_client2| [Client 222] Echoed from server : Hello from client 222 21
+echo_client1| [Client 111] Send to Server : Hello from client 111 28
+echo_server | Received : Hello from client 222 5
+echo_client2| [Client 222] Send to Server : Hello from client 222 22
+echo_client1| [Client 111] Echoed from server : Hello from client 111 28
+echo_server | Received : Hello from client 222 6
+echo_client2| [Client 222] Echoed from server : Hello from client 222 22
+echo_client1| [Client 111] Send to Server : Hello from client 111 29
+echo_server | Received : Hello from client 222 7
+echo_client2| [Client 222] Send to Server : Hello from client 222 23
+echo_client1| [Client 111] Echoed from server : Hello from client 111 29
+echo_server | Received : Hello from client 222 8
+echo_client2| [Client 222] Echoed from server : Hello from client 222 23
+echo_client1| [Client 111] Send to Server : Hello from client 111 30
+echo_server | Received : Hello from client 222 9
+echo_client2| [Client 222] Send to Server : Hello from client 222 24
+echo_client1| [Client 111] Echoed from server : Hello from client 111 30
+echo_server | Received : Hello from client 222 10
+echo_client2| [Client 222] Echoed from server : Hello from client 222 24
+echo_client1| [Client 111] Send to Server : Hello from client 111 31
+echo_server | Received : Hello from client 222 11
+echo_client2| [Client 222] Send to Server : Hello from client 222 25
+echo_client1| [Client 111] Echoed from server : Hello from client 111 31
+echo_server | Received : Hello from client 222 12
+echo_client2| [Client 222] Echoed from server : Hello from client 222 25
+echo_client1| [Client 111] Send to Server : Hello from client 111 32
+echo_server | Received : Hello from client 222 13
+echo_client2| [Client 222] Send to Server : Hello from client 222 26
+echo_client1| [Client 111] Echoed from server : Hello from client 111 32
+echo_server | Received : Hello from client 222 14
+echo_client2| [Client 222] Echoed from server : Hello from client 222 26
+echo_client1| [Client 111] Send to Server : Hello from client 111 33
+echo_server | Received : Hello from client 222 15
+echo_client2| [Client 222] Send to Server : Hello from client 222 27
+echo_client1| [Client 111] Echoed from server : Hello from client 111 33
+echo_server | Received : Hello from client 222 16
+echo_client2| [Client 222] Echoed from server : Hello from client 222 27
+echo_client1| [Client 111] Send to Server : Hello from client 111 34
+echo_server | Received : Hello from client 222 17
+echo_client2| [Client 222] Send to Server : Hello from client 222 28
+echo_client1| [Client 111] Echoed from server : Hello from client 111 34
+echo_server | Received : Hello from client 222 18
+echo_client2| [Client 222] Echoed from server : Hello from client 222 28
+echo_client1| [Client 111] Send to Server : Hello from client 111 35
+echo_server | Received : Hello from client 222 19
+echo_client2| [Client 222] Send to Server : Hello from client 222 29
+echo_client1| [Client 111] Echoed from server : Hello from client 111 35
+echo_server | Received : Hello from client 222 20
+echo_client2| [Client 222] Echoed from server : Hello from client 222 29
+echo_client1| [Client 111] Send to Server : Hello from client 111 36
+echo_server | Received : Hello from client 222 21
+echo_client2| [Client 222] Send to Server : Hello from client 222 30
+echo_client1| [Client 111] Echoed from server : Hello from client 111 36
+echo_server | Received : Hello from client 222 22
+echo_client2| [Client 222] Echoed from server : Hello from client 222 30
+echo_client1| [Client 111] Send to Server : Hello from client 111 37
+echo_server | Received : Hello from client 222 23
+echo_client2| [Client 222] Send to Server : Hello from client 222 31
+echo_client1| [Client 111] Echoed from server : Hello from client 111 37
+echo_server | Received : Hello from client 222 24
+echo_client2| [Client 222] Echoed from server : Hello from client 222 31
+echo_client1| [Client 111] Send to Server : Hello from client 111 38
+echo_server | Received : Hello from client 222 25
+echo_client2| [Client 222] Send to Server : Hello from client 222 32
+echo_client1| [Client 111] Echoed from server : Hello from client 111 38
+echo_server | Received : Hello from client 222 26
+echo_client2| [Client 222] Echoed from server : Hello from client 222 32
+echo_client1| [Client 111] Send to Server : Hello from client 111 39
+echo_server | Received : Hello from client 222 27
+echo_client2| [Client 222] Send to Server : Hello from client 222 33
+echo_client1| [Client 111] Echoed from server : Hello from client 111 39
+echo_server | Received : Hello from client 222 28
+echo_client2| [Client 222] Echoed from server : Hello from client 222 33
+echo_client1| [Client 111] Send to Server : Hello from client 111 40
+echo_server | Received : Hello from client 222 29
+echo_client2| [Client 222] Send to Server : Hello from client 222 34
+echo_client1| [Client 111] Echoed from server : Hello from client 111 40
+echo_server | Received : Hello from client 222 30
+echo_client2| [Client 222] Echoed from server : Hello from client 222 34
+echo_client1| [Client 111] Send to Server : Hello from client 111 41
+echo_server | Received : Hello from client 222 31
+echo_client2| [Client 222] Send to Server : Hello from client 222 35
+echo_client1| [Client 111] Echoed from server : Hello from client 111 41
+echo_server | Received : Hello from client 222 32
+echo_client2| [Client 222] Echoed from server : Hello from client 222 35
+echo_client1| [Client 111] Send to Server : Hello from client 111 42
+echo_server | Received : Hello from client 222 33
+echo_client2| [Client 222] Send to Server : Hello from client 222 36
+echo_client1| [Client 111] Echoed from server : Hello from client 111 42
+echo_server | Received : Hello from client 222 34
+echo_client2| [Client 222] Echoed from server : Hello from client 222 36
+echo_client1| [Client 111] Send to Server : Hello from client 111 43
+echo_server | Received : Hello from client 222 35
+echo_client2| [Client 222] Send to Server : Hello from client 222 37
+echo_client1| [Client 111] Echoed from server : Hello from client 111 43
+echo_server | Received : Hello from client 222 36
+echo_client2| [Client 222] Echoed from server : Hello from client 222 37
+echo_client1| [Client 111] Send to Server : Hello from client 111 44
+echo_server | Received : Hello from client 222 37
+echo_client2| [Client 222] Send to Server : Hello from client 222 38
+echo_client1| [Client 111] Echoed from server : Hello from client 111 44
+echo_server | Received : Hello from client 222 38
+echo_client2| [Client 222] Echoed from server : Hello from client 222 38
+echo_client2| [Client 222] Send to Server : Hello from client 222 39
+echo_client2| [Client 222] Echoed from server : Hello from client 222 39
+echo_client2| [Client 222] Send to Server : Hello from client 222 40
+echo_client2| [Client 222] Echoed from server : Hello from client 222 40
+echo_server | Received : Hello from client 222 39
+echo_client1| [Client 111] Send to Server : Hello from client 111 45
+echo_client2| [Client 222] Send to Server : Hello from client 222 41
+echo_server | Received : Hello from client 222 40
+echo_client1| [Client 111] Echoed from server : Hello from client 111 45
+echo_client2| [Client 222] Echoed from server : Hello from client 222 41
+echo_server | Received : Hello from client 222 41
+echo_client1| [Client 111] Send to Server : Hello from client 111 46
+echo_client2| [Client 222] Send to Server : Hello from client 222 42
+echo_server | Received : Hello from client 222 42
+echo_client1| [Client 111] Echoed from server : Hello from client 111 46
+echo_client2| [Client 222] Echoed from server : Hello from client 222 42
+echo_server | Received : Hello from client 222 43
+echo_client1| [Client 111] Send to Server : Hello from client 111 47
+echo_client2| [Client 222] Send to Server : Hello from client 222 43
+echo_server | Received : Hello from client 222 44
+echo_client1| [Client 111] Echoed from server : Hello from client 111 47
+echo_client2| [Client 222] Echoed from server : Hello from client 222 43
+echo_server | Received : Hello from client 222 45
+echo_client1| [Client 111] Send to Server : Hello from client 111 48
+echo_client2| [Client 222] Send to Server : Hello from client 222 44
+echo_server | Received : Hello from client 222 46
+echo_client1| [Client 111] Echoed from server : Hello from client 111 48
+echo_client2| [Client 222] Echoed from server : Hello from client 222 44
+echo_server | Received : Hello from client 222 47
+echo_client1| [Client 111] Send to Server : Hello from client 111 49
+echo_client2| [Client 222] Send to Server : Hello from client 222 45
+echo_server | Received : Hello from client 222 48
+echo_client1| [Client 111] Echoed from server : Hello from client 111 49
+echo_client2| [Client 222] Echoed from server : Hello from client 222 45
+echo_server | Received : Hello from client 222 49
+echo_client1| [Client 111] Send to Server : Hello from client 111 50
+echo_client2| [Client 222] Send to Server : Hello from client 222 46
+echo_server | Received : Hello from client 222 50
+echo_client1| [Client 111] Echoed from server : Hello from client 111 50
+echo_client2| [Client 222] Echoed from server : Hello from client 222 46
+echo_server | Connected Closed.
+echo_client2| [Client 222] Send to Server : Hello from client 222 47
+echo_client2| [Client 222] Echoed from server : Hello from client 222 47
+echo_client2| [Client 222] Send to Server : Hello from client 222 48
+echo_client2| [Client 222] Echoed from server : Hello from client 222 48
+echo_client2| [Client 222] Send to Server : Hello from client 222 49
+echo_client2| [Client 222] Echoed from server : Hello from client 222 49
+echo_client2| [Client 222] Send to Server : Hello from client 222 50
+echo_client2| [Client 222] Echoed from server : Hello from client 222 50
+echo_client3 exited with code 0
+echo_client1 exited with code 0
+echo_client2 exited with code 0
+Gracefully stopping... (press Ctrl+C again to force)
+[+] Stopping 4/4
+ ✔ Container echo_client3Stopped0.0s 
+ ✔ Container echo_client1Stopped0.0s 
+ ✔ Container echo_client2Stopped0.0s 
+ ✔ Container echo_server Stopped
