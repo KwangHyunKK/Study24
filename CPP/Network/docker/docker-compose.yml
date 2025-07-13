@@ -1,0 +1,77 @@
+# docker-compose.yml
+services:
+  server:
+    build:
+      context: ../server
+      dockerfile: Dockerfile
+    image: echo-server:latest
+    container_name: echo_server
+    tty: true
+    stdin_open: true
+    ports:
+      - "12345:12345"  # host:container
+    volumes:
+      - ../server:/workspace
+    command: >
+      /bin/bash -c "
+        # 1) source build
+        g++ server.cpp -o server && \
+        # 2) build success -> run
+        ./server
+      "
+
+  client1:
+    build:
+      context: ../client
+      dockerfile: Dockerfile
+    image: echo-client:latest
+    container_name: echo_client1
+    tty: true
+    stdin_open: true
+    depends_on:
+      - server
+    volumes:
+      - ../client:/workspace
+    command: >
+      /bin/bash -c "
+        g++ client.cpp -o client && \
+        ./client server 111
+      "
+
+# In docker compose, server hostname will refers to the server service container.
+
+  client2:
+    build:
+      context: ../client
+      dockerfile: Dockerfile
+    image: echo-client:latest
+    container_name: echo_client2
+    tty: true
+    stdin_open: true
+    depends_on:
+      - server
+    volumes:
+      - ../client:/workspace
+    command: >
+      /bin/bash -c "
+        g++ client.cpp -o client && \
+        ./client server 222
+      "
+  
+  client3:
+    build:
+      context: ../client
+      dockerfile: Dockerfile
+    image: echo-client:latest
+    container_name: echo_client3
+    tty: true
+    stdin_open: true
+    depends_on:
+      - server
+    volumes:
+      - ../client:/workspace
+    command: >
+      /bin/bash -c "
+        g++ client.cpp -o client && \
+        ./client server 333
+      "
