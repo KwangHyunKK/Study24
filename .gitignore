@@ -68,3 +68,6 @@ peda*
 # cmake files
 _deps/
 CMakeFiles/
+
+# .venv
+.venv/
