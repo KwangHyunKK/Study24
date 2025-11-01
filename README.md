@@ -3,7 +3,7 @@
 ### Docker Ubuntu 22:04 설치
 
 ```
-$ docker pull ubuntu:20.04
+$ docker pull ubuntu:22.04
 
 $ docker run -it --name my-ubuntu ubuntu:20.04 # docker run 실행
 

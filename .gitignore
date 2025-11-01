@@ -61,6 +61,9 @@ build/
 *.out
 main
 peda*
+CPP17/_deps/
+CPP17/CMakeFiles/NightlySubmit.dir/
+CPP17/CMakeFiles/
 
 # .token
 *token*
